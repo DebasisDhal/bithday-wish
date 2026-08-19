@@ -1,0 +1,746 @@
+<div class="birthday-app">
+
+
+  <!-- =====================================================
+       STEP 1
+       IT IS YOUR SPECIAL DAY
+  ====================================================== -->
+
+  <section
+    class="screen"
+    *ngIf="step === 1"
+  >
+
+    <div class="card">
+
+      <div class="emoji">
+        🎉
+      </div>
+
+      <p class="small-text">
+        A little birthday message...
+      </p>
+
+      <h1>
+        It is your
+        <span>special day!</span>
+      </h1>
+
+      <p class="description">
+        And yes... someone has actually prepared
+        something for Madam Ji. 😎🎂
+      </p>
+
+      <button
+        class="main-button"
+        (click)="startSurprise()"
+      >
+        START THE SURPRISE 🎁
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       STEP 2
+       SOMETHING SPECIAL MADE
+  ====================================================== -->
+
+  <section
+    class="screen"
+    *ngIf="step === 2"
+  >
+
+    <div class="card">
+
+      <div class="gift">
+        🎁
+      </div>
+
+      <p class="small-text">
+        WARNING ⚠️
+      </p>
+
+      <h1>
+        Something special
+      </h1>
+
+      <h2>
+        has been prepared for you! 😎
+      </h2>
+
+      <p class="description">
+        Don't worry Madam Ji...
+        No assignments, no office work,
+        no interview questions. 😂
+      </p>
+
+      <button
+        class="main-button"
+        (click)="continueSurprise()"
+      >
+        SHOW ME 👀
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       STEP 3
+       YES / NO
+  ====================================================== -->
+
+  <section
+    class="screen"
+    *ngIf="step === 3"
+  >
+
+    <div class="card question-card">
+
+      <div class="question-icon">
+        👀
+      </div>
+
+      <p class="small-text">
+        IMPORTANT QUESTION
+      </p>
+
+      <h1>
+        Do you want to see
+      </h1>
+
+      <h2>
+        what I made for you? 🎁
+      </h2>
+
+      <p class="description">
+        Choose wisely, Madam Ji. 😏
+      </p>
+
+
+      <!-- YES / NO -->
+
+      <div class="buttons-area">
+
+        <button
+          class="yes-button"
+          (click)="yesButton()"
+        >
+          YES, SHOW ME 😎
+        </button>
+
+
+        <button
+          class="no-button"
+          (mouseenter)="escapeNoButton()"
+          (touchstart)="escapeNoButton()"
+          (click)="escapeNoButton()"
+          [style.transform]="
+            'translate(' +
+            noX +
+            'px, ' +
+            noY +
+            'px)'
+          "
+        >
+          NO 😂
+        </button>
+
+      </div>
+
+
+      <!-- NO MESSAGE -->
+
+      <p
+        class="no-message"
+        *ngIf="noAttempts > 0"
+      >
+        {{ noMessage }}
+      </p>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       STEP 4
+       MADAM JI
+  ====================================================== -->
+
+  <section
+    class="screen"
+    *ngIf="step === 4"
+  >
+
+    <div class="card madam-card">
+
+      <p class="small-text">
+        WAIT A SECOND... 👀
+      </p>
+
+      <h1>
+        Have you looked at
+      </h1>
+
+      <h2>
+        Madam Ji? 😎
+      </h2>
+
+
+      <!-- SKETCH PHOTO -->
+
+      <div class="sketch-container">
+
+        <img
+          src="madam-sketch.jpeg"
+          alt="Madam Ji Sketch"
+          class="sketch-photo"
+        />
+
+      </div>
+
+
+      <p class="description">
+        Official Birthday Madam Ji detected! 😂
+        <br>
+        Birthday mode is now activated. 🎉
+      </p>
+
+
+      <button
+        class="main-button"
+        (click)="nextToLight()"
+      >
+        OKAY, WHAT'S NEXT? 👀
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       STEP 5
+       LIGHT ON
+  ====================================================== -->
+
+  <section
+    class="screen dark-room"
+    [class.light-on]="lightOn"
+    *ngIf="step === 5"
+  >
+
+    <div class="light-content">
+
+      <div class="bulb">
+        💡
+      </div>
+
+      <h1>
+        It's a little dark here...
+      </h1>
+
+      <p>
+        Madam Ji, the birthday party
+        cannot start in darkness! 😂
+      </p>
+
+      <button
+        class="main-button"
+        (click)="turnOnLight()"
+      >
+        TURN ON THE LIGHT 💡
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       STEP 6
+       MUSIC
+  ====================================================== -->
+
+  <section
+    class="screen music-screen"
+    *ngIf="step === 6"
+  >
+
+    <div class="card">
+
+      <div class="music-icon">
+        🎵
+      </div>
+
+      <p class="small-text">
+        NEXT LEVEL ACTIVATED
+      </p>
+
+      <h1>
+        Now let's add some music!
+      </h1>
+
+      <p class="description">
+        Because a birthday without music
+        is basically a normal working day. 😂
+      </p>
+
+      <button
+        class="main-button"
+        (click)="playMusic()"
+      >
+        PLAY MUSIC 🎵
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       STEP 7
+       BALLOONS
+  ====================================================== -->
+
+  <section
+    class="screen balloon-screen"
+    *ngIf="step === 7"
+  >
+
+
+    <!-- FLOATING BALLOONS -->
+
+    <div class="balloon-container">
+
+      <div
+        class="floating-balloon"
+        *ngFor="let balloon of balloons"
+        [style.left.%]="balloon.left"
+        [style.animation-delay.s]="balloon.delay"
+        [style.animation-duration.s]="balloon.duration"
+      >
+        {{ balloon.emoji }}
+      </div>
+
+    </div>
+
+
+
+    <div class="card balloon-card">
+
+      <div class="music-playing">
+        🎵
+      </div>
+
+      <p class="small-text">
+        MUSIC ON 🎶
+      </p>
+
+      <h1>
+        Now let's add some balloons!
+      </h1>
+
+      <h2>
+        Because one balloon is never enough. 😂
+      </h2>
+
+      <p class="description">
+        Madam Ji, ready for some birthday madness? 🎈
+      </p>
+
+      <button
+        class="main-button"
+        (click)="flyBalloons()"
+      >
+        FLY THE BALLOONS 🎈
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       STEP 8
+       BALLOONS FLYING
+  ====================================================== -->
+
+  <section
+    class="screen flying-screen"
+    [class.balloons-active]="balloonsFlying"
+    *ngIf="step === 8"
+  >
+
+
+    <!-- FLYING BALLOONS -->
+
+    <div class="flying-balloons">
+
+      <div
+        class="big-balloon"
+        *ngFor="let balloon of balloons"
+        [style.left.%]="balloon.left"
+        [style.animation-delay.s]="balloon.delay"
+        [style.animation-duration.s]="balloon.duration"
+      >
+        🎈
+      </div>
+
+    </div>
+
+
+
+    <div class="balloon-message">
+
+      <h1>
+        Look at them fly! 🎈
+      </h1>
+
+      <p>
+        More balloons...
+      </p>
+
+      <p>
+        More fun...
+      </p>
+
+      <p>
+        And absolutely no office work today. 😂
+      </p>
+
+
+      <button
+        class="main-button"
+        (click)="showCake()"
+      >
+        LET'S CUT THE CAKE 🎂
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       STEP 9
+       CAKE
+  ====================================================== -->
+
+  <section
+    class="screen cake-screen"
+    *ngIf="step === 9"
+  >
+
+    <div class="cake-card">
+
+      <p class="small-text">
+        FINALLY... 🎉
+      </p>
+
+      <h1>
+        Let's cut the cake!
+      </h1>
+
+      <h2>
+        Madam Ji 🎂
+      </h2>
+
+
+      <div
+        class="cake-container"
+        [class.cake-cut]="cakeCut"
+      >
+
+        <div class="cake-emoji">
+          🎂
+        </div>
+
+      </div>
+
+
+      <p class="cake-text">
+        Birthday cake protocol activated. 😎
+        <br>
+        Please proceed with the cake cutting.
+      </p>
+
+
+      <button
+        class="main-button"
+        (click)="cutCake()"
+      >
+        🎂 CUT THE CAKE
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       STEP 10
+       BIRTHDAY MESSAGE
+  ====================================================== -->
+
+  <section
+    class="screen final-screen"
+    *ngIf="step === 10"
+  >
+
+
+    <!-- CONFETTI -->
+
+    <div class="confetti-container">
+
+      <span
+        *ngFor="let item of confetti"
+        class="confetti"
+        [style.left.%]="(item * 37) % 100"
+        [style.animation-delay.ms]="(item * 17) % 1000"
+      >
+
+        {{
+          item % 3 === 0
+            ? '🎉'
+            : item % 3 === 1
+            ? '✨'
+            : '🎈'
+        }}
+
+      </span>
+
+    </div>
+
+
+
+    <div class="card final-card">
+
+      <div class="birthday-icon">
+        🎂
+      </div>
+
+      <p class="small-text">
+        OFFICIAL BIRTHDAY MESSAGE
+      </p>
+
+      <h1>
+        HAPPY BIRTHDAY!
+      </h1>
+
+
+      <div class="birthday-name">
+        MADAM JI 😎
+      </div>
+
+
+      <div class="celebration-line">
+        🎉 🎈 ✨ 🎂 ✨ 🎈 🎉
+      </div>
+
+
+      <p class="birthday-message">
+
+        Wishing you a fantastic birthday
+        filled with laughter, fun,
+        good memories and lots of cake! 🎂
+
+      </p>
+
+
+      <p class="birthday-message">
+
+        Keep learning, keep growing,
+        keep smiling and keep being
+        the same fun person you are. 😄
+
+      </p>
+
+
+      <p class="special-message">
+
+        May this year bring you
+        lots of success and happiness. ✨
+
+      </p>
+
+
+      <p class="funny-message">
+
+        And yes...
+        today you are officially allowed
+        to ignore all serious work. 😂
+
+      </p>
+
+
+      <button
+        class="main-button"
+        (click)="goToWish()"
+      >
+        ONE LAST THING... 👀
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+ <!-- =================================================
+     STEP 11
+     MAKE A WISH
+================================================== -->
+
+<section
+  class="wish-page"
+  *ngIf="step === 11"
+>
+
+  <!-- Stars -->
+
+  <div class="stars-background">
+
+    <span class="star star-1">✦</span>
+    <span class="star star-2">✧</span>
+    <span class="star star-3">✦</span>
+    <span class="star star-4">⋆</span>
+    <span class="star star-5">✧</span>
+    <span class="star star-6">✦</span>
+    <span class="star star-7">⋆</span>
+    <span class="star star-8">✧</span>
+    <span class="star star-9">✦</span>
+    <span class="star star-10">⋆</span>
+
+  </div>
+
+
+  <!-- Moon -->
+
+  <div class="moon">
+    🌙
+  </div>
+
+
+  <!-- Wish Content -->
+
+  <div class="wish-content">
+
+    <p class="wish-small-title">
+      ONE LAST THING... 👀
+    </p>
+
+
+    <!-- PHOTO FROM FIRST PAGE -->
+
+    <div class="wish-photo">
+
+      <img
+        src="madam-sketch.jpeg"
+        alt="Birthday Girl"
+        class="wish-photo-image"
+      />
+
+    </div>
+
+
+    <h1 class="wish-title">
+      Make a Birthday Wish
+    </h1>
+
+
+    <h2 class="wish-subtitle">
+      No cheating! 😎
+    </h2>
+
+
+    <!-- Candle -->
+
+    <div class="candle-area">
+
+      <div class="flame">
+        🔥
+      </div>
+
+      <div class="candle">
+        🕯️
+      </div>
+
+    </div>
+
+
+    <p class="wish-text">
+      Think of one thing you really
+      want this year.
+    </p>
+
+    <p class="wish-text">
+      Close your eyes, make your wish,
+      and don't tell anyone! 🤫
+    </p>
+
+
+    <!-- Make Wish Button -->
+
+    <button
+      class="wish-button"
+      *ngIf="!wishMade"
+      (click)="makeWish()"
+    >
+      ✨ MAKE MY WISH ✨
+    </button>
+
+
+    <!-- Wish Result -->
+
+    <div
+      class="wish-result"
+      *ngIf="wishMade"
+    >
+
+      <div class="magic-stars">
+        🎉 ✨ 🌟 ✨ 🎉
+      </div>
+
+      <h2>
+        Wish Submitted! 😎
+      </h2>
+
+      <p>
+        Your birthday request has been
+        successfully forwarded to the Universe. 😂
+      </p>
+
+      <div class="wish-icon">
+        🚀
+      </div>
+
+      <p class="final-line">
+        Processing your wish...
+        Please wait for some magic! ✨
+      </p>
+
+      <p class="final-birthday">
+        HAPPY BIRTHDAY, MADAM JI! 🎂🎉
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
